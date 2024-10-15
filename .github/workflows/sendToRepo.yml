@@ -1,0 +1,13 @@
+name: Save in repo
+on:
+  push:
+    branches:
+      - main
+jobs:
+  update-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get files in txt
+        run: |
+          contenido=$(tr '\n' ' ' < ./files/new-files/archivesToTest.txt)
+          echo "$contenido"
