@@ -12,5 +12,5 @@ jobs:
 
       - name: get files in txt
         run: |
-          contenido=$(tr '\n' ' ' < /files/new-files/archivesToTest.txt)
+          contenido=$(tr '\n' ' ' < files/new-files/archivesToTest.txt)
           echo "$contenido"
