@@ -9,7 +9,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+        with:
+          token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: get files in txt
         run: |
           contenido=$(tr '\n' ' ' < files/new-files/archivesToTest.txt)
@@ -17,8 +18,8 @@ jobs:
       - name: Get files in central repository
         uses: actions/checkout@v4
         with:
-            repository: 'Rodcarm/personal-website'
-            token: ${{ secrets.API_TOKEN_GITHUB }}
+          repository: 'Rodcarm/personal-website'
+          token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: Push file to another repository
         uses: nkoppel/push-files-to-another-repository@v1.1.3
         env:
