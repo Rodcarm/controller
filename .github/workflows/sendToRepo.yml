@@ -12,7 +12,7 @@ jobs:
       - name: get files in txt
         run: |
           contenido=$(tr '\n' ' ' < files/new-files/archivesToTest.txt)
-          echo "$contenido"
+          echo "contenido=$contenido" >> $GITHUB_ENV
       - name: Get files in central repository
         uses: actions/checkout@v3
         with:
@@ -23,7 +23,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-files: "$contenido"
+          source-files: ${{ env.contenido }}
           destination-branch: 'main'
           destination-username: 'Rodcarm'
           destination-repository: 'gitActionspersonal-website'
