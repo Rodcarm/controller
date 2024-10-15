@@ -28,6 +28,8 @@ jobs:
       #     git add ${{ env.contenido }}
       #     git commit -m "esto es un test"
       #     git push https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git
+      - name: Show repo info
+        run: echo "Current repository: ${{ github.repository }}"
       - name: Push file to another repository
         uses: nkoppel/push-files-to-another-repository@v1.1.3
         env:
