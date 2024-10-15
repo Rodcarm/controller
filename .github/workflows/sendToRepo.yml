@@ -18,13 +18,18 @@ jobs:
         with:
           repository: 'Rodcarm/personal-website'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: Push file to another repository
-        uses: nkoppel/push-files-to-another-repository@v1.1.3
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source-files: ${{ env.contenido }}
-          destination-branch: 'main'
-          destination-username: 'Rodcarm'
-          destination-repository: 'gitActionspersonal-website'
-          commit-email: rcarmona@realmetrics.io
+      - name: save changes
+          run: |
+            git add ${{ env.contenido }}
+            git commit -m "esto es un test"
+            git push https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git
+      # - name: Push file to another repository
+      #   uses: nkoppel/push-files-to-another-repository@v1.1.3
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      #   with:
+      #     source-files: ${{ env.contenido }}
+      #     destination-branch: 'main'
+      #     destination-username: 'Rodcarm'
+      #     destination-repository: 'gitActionspersonal-website'
+      #     commit-email: rcarmona@realmetrics.io
