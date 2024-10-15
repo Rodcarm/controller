@@ -1,0 +1,2 @@
+webpersonal/core/views.py
+webpersonal/portafolio/views.py
