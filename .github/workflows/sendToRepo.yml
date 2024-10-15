@@ -20,6 +20,8 @@ jobs:
           token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: save changes
         run: |
+          git config --global user.name "Rodrigo"
+          git config --global user.email "rcarmona@realmetrics.io"
           git add ${{ env.contenido }}
           git commit -m "esto es un test"
           git push https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git
