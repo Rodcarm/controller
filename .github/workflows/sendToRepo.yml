@@ -8,15 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.API_TOKEN_GITHUB }}
+        uses: actions/checkout@v3
       - name: get files in txt
         run: |
           contenido=$(tr '\n' ' ' < files/new-files/archivesToTest.txt)
           echo "$contenido"
       - name: Get files in central repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           repository: 'Rodcarm/personal-website'
           token: ${{ secrets.API_TOKEN_GITHUB }}
