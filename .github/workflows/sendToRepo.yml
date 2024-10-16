@@ -1,43 +1,78 @@
-name: Save in repo
+# name: Save in repo
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   update-repo:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository central
+#         uses: actions/checkout@v3
+#         with:
+#           repository: 'Rodcarm/controller'
+#           token: ${{ secrets.API_TOKEN_GITHUB }}
+#       - name: get files in txt
+#         run: |
+#           contenido=$(tr '\n' ' ' < files/new-files/archivesToTest.txt)
+#           echo "contenido=$contenido" >> $GITHUB_ENV
+#       - name: Get files in central repository
+#         uses: actions/checkout@v3
+#         with:
+#           repository: 'Rodcarm/personal-website'
+#           token: ${{ secrets.API_TOKEN_GITHUB }}
+#       - name: save changes
+#         run: |
+#           git config --global user.name "Rodrigo"
+#           git config --global user.email "rcarmona@realmetrics.io"
+#           git add ${{ env.contenido }}
+#           git commit -m "esto es un test"
+#           git push https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git
+#       # - name: Show repo info
+#       #   run: |
+#       #   echo "Current repository: ${{ github.repository }}"
+#       # - name: Push file to another repository
+#       #   uses: nkoppel/push-files-to-another-repository@v1.1.3
+#       #   env:
+#       #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#       #   with:
+#       #     source-files: ${{ env.contenido }}
+#       #     destination-branch: 'main'
+#       #     destination-username: 'Rodcarm'
+#       #     destination-repository: 'gitActionspersonal-website'
+#       #     commit-email: rcarmona@realmetrics.io
+
+name: Clone specific file
 on:
   push:
     branches:
       - main
+
 jobs:
-  update-repo:
+  clone-file:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository central
+      - name: Checkout destination repository
         uses: actions/checkout@v3
         with:
-          repository: 'Rodcarm/controller'
-          token: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: get files in txt
+          repository: 'gitActionspersonal-website'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clone specific file
         run: |
-          contenido=$(tr '\n' ' ' < files/new-files/archivesToTest.txt)
-          echo "contenido=$contenido" >> $GITHUB_ENV
-      - name: Get files in central repository
-        uses: actions/checkout@v3
-        with:
-          repository: 'Rodcarm/personal-website'
-          token: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: save changes
+          git clone --no-checkout https://github.com/Rodcarm/personal-website.git temp-repo
+          cd temp-repo
+          git sparse-checkout init --cone
+          git sparse-checkout set webpersonal/core/views.py
+          git checkout
+          
+          # Copiar archivo al repositorio destino
+          cp webpersonal/core/views.py ../webpersonal/core/views.py
+          
+      - name: Commit and push
         run: |
           git config --global user.name "Rodrigo"
           git config --global user.email "rcarmona@realmetrics.io"
-          git add ${{ env.contenido }}
-          git commit -m "esto es un test"
-          git push https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git
-      # - name: Show repo info
-      #   run: |
-      #   echo "Current repository: ${{ github.repository }}"
-      # - name: Push file to another repository
-      #   uses: nkoppel/push-files-to-another-repository@v1.1.3
-      #   env:
-      #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      #   with:
-      #     source-files: ${{ env.contenido }}
-      #     destination-branch: 'main'
-      #     destination-username: 'Rodcarm'
-      #     destination-repository: 'gitActionspersonal-website'
-      #     commit-email: rcarmona@realmetrics.io
+          git add ./webpersonal/core/views.py
+          git commit -m "Agregar archivo específico"
+          git push
