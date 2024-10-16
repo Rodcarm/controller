@@ -71,6 +71,7 @@ jobs:
           echo "copying content"
           mkdir -p "$CLONE_DIRECTORY/webpersonal/core/"
           cp -rvf "webpersonal/core/views.py" "$CLONE_DIRECTORY/webpersonal/core/"
+          ls "$CLONE_DIRECTORY/webpersonal/core/"
 
           ORIGIN_COMMIT="https://github.com/Rodcarm/controller/commit/2345432343"
           COMMIT_MESSAGE="THIS IS A TEST"
