@@ -42,6 +42,7 @@
 #       #     destination-repository: 'gitActionspersonal-website'
 #       #     commit-email: rcarmona@realmetrics.io
 
+
 name: Clone files
 on:
   push:
@@ -78,6 +79,7 @@ jobs:
           echo "copying content"
           mkdir -p "$CLONE_DIRECTORY/webpersonal/core/"
           cp -rvf "./webpersonal/core/views.py" "$CLONE_DIRECTORY/webpersonal/core/"
+          cd ""$CLONE_DIRECTORY"
           ls "$CLONE_DIRECTORY/webpersonal/core/"
 
           echo "cat destination"
