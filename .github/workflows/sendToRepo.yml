@@ -83,6 +83,7 @@ jobs:
           ls -la "$CLONE_DIRECTORY"
 
           echo "copying content"
+          echo "${paths[@]}"
           for path in "${paths[@]}"; do
             DESTINATION_DIRECTORY=$(dirname "$path")/
             echo "directory ${DESTINATION_DIRECTORY}"
