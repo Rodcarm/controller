@@ -31,7 +31,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-files: './personal-website/webpersonal/core/views.py'
+          source-files: '/personal-website/webpersonal/core/views.py'
           destination-branch: 'main'
           destination-username: 'Rodcarm'
           destination-repository: 'gitActionspersonal-website'
