@@ -33,7 +33,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
           echo 
-        with: ${{ env.contenido }}
+        with:
           source-files: ${{ env.contenido }}
           destination-branch: 'main'
           destination-username: 'Rodcarm'
