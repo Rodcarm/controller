@@ -57,7 +57,12 @@ jobs:
         with:
           repository: 'Rodcarm/controller'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-
+      - name: test
+        run: |
+          mapfile -t archivos < files/new-files/archivesToTest.txt
+          for archivo in "${archivos[@]}"; do
+            echo "$archivo"
+          done
       - name: Clone specific file
         run: |
           git clone --no-checkout https://github.com/Rodcarm/personal-website.git temp-repo
