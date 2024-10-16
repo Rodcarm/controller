@@ -52,6 +52,14 @@ jobs:
   clone-file:
     runs-on: ubuntu-latest
     steps:
+      - name: Get txt file
+        uses: actions/checkout@v4
+        with:
+          repository: 'Rodcarm/controller'
+          token: ${{ secrets.API_TOKEN_GITHUB }}
+        run: |
+          mapfile -t paths < "files/new-files/archivesToTest.txt"
+          echo "paths=${paths[*]}" >> $GITHUB_ENV
       - name: Get personal-website
         uses: actions/checkout@v4
         with:
@@ -77,10 +85,11 @@ jobs:
           cat "$CLONE_DIRECTORY/webpersonal/core/views.py"
 
           echo "copying content"
-          mkdir -p "$CLONE_DIRECTORY/webpersonal/core/"
-          cp -rvf "./webpersonal/core/views.py" "$CLONE_DIRECTORY/webpersonal/core/"
+          for path in "${paths[@]}"; do
+            DESTINATION_DIRECTORY=$(dirname "$path")/
+            mkdir -p "$CLONE_DIRECTORY/$DESTINATION_DIRECTORY"
+            cp -rvf "./$path" "$CLONE_DIRECTORY/$DESTINATION_DIRECTORY"
           cd "$CLONE_DIRECTORY"
-          ls "$CLONE_DIRECTORY/webpersonal/core/"
 
           echo "cat destination"
           cat "$CLONE_DIRECTORY/webpersonal/core/views.py"
