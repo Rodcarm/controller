@@ -89,6 +89,7 @@ jobs:
             echo "path: ${path}"
             mkdir -p "$CLONE_DIRECTORY/$DESTINATION_DIRECTORY"
             cp -rvf "./$path" "$CLONE_DIRECTORY/$DESTINATION_DIRECTORY"
+          done
           cd "$CLONE_DIRECTORY"
 
           echo "cat destination"
