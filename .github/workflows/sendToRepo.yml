@@ -21,13 +21,6 @@ jobs:
         with:
           repository: 'Rodcarm/personal-website'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-      # - name: save changes
-      #   run: |
-      #     git config --global user.name "Rodrigo"
-      #     git config --global user.email "rcarmona@realmetrics.io"
-      #     git add ${{ env.contenido }}
-      #     git commit -m "esto es un test"
-      #     git push https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git
       - name: Show repo info
         run: |
           echo "Current repository: ${{ github.repository }}"
@@ -35,7 +28,9 @@ jobs:
         uses: nkoppel/push-files-to-another-repository@v1.1.3
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
+        run: |
+          echo 
+        with: ${{ env.contenido }}
           source-files: ${{ env.contenido }}
           destination-branch: 'main'
           destination-username: 'Rodcarm'
