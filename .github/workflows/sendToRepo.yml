@@ -63,7 +63,7 @@ jobs:
           git clone --no-checkout https://github.com/Rodcarm/personal-website.git temp-repo
           cd temp-repo
           git sparse-checkout init --cone
-          mapfile -t archivos < ./files/new-files/archivesToTest.txt
+          mapfile -t archivos < files/new-files/archivesToTest.txt
           git sparse-checkout set "${archivos[@]}"
           git checkout
           
