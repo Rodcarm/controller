@@ -65,19 +65,26 @@ jobs:
           git clone https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/personal-website.git repo
           cd repo
           ls -la
+
           echo "cat source"
           cat "webpersonal/core/views.py"
           git clone --single-branch --branch "main" "https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git" "$CLONE_DIRECTORY"
+
           echo "CLONE DIRECTORY"
           ls -la "$CLONE_DIRECTORY"
+          echo "cat clone directory"
+          cat "$CLONE_DIRECTORY/webpersonal/core/views.py"
+
           echo "copying content"
           mkdir -p "$CLONE_DIRECTORY/webpersonal/core/"
           cp -rvf "webpersonal/core/views.py" "$CLONE_DIRECTORY/webpersonal/core/"
           ls "$CLONE_DIRECTORY/webpersonal/core/"
+
           echo "cat destination"
           cat "$CLONE_DIRECTORY/webpersonal/core/views.py"
           ORIGIN_COMMIT="https://github.com/Rodcarm/controller/commit/2345432343"
           COMMIT_MESSAGE="THIS IS A TEST"
+
           echo "git add"
           git add .
           git status
