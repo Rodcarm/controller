@@ -42,53 +42,76 @@
 #       #     destination-repository: 'gitActionspersonal-website'
 #       #     commit-email: rcarmona@realmetrics.io
 
-name: Clone specific file
+name: Clone files
 on:
   push:
     branches:
       - main
-
 jobs:
   clone-file:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout destination repository
-        uses: actions/checkout@v3
+      - name: Get personal-website
+        uses: actions/checkout@v4
         with:
-          repository: 'Rodcarm/controller'
+          repository: 'Rodcarm/personal-website.git'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: test
+      - name: 
         run: |
-          mapfile -t archivos < files/new-files/archivesToTest.txt
-          echo "archivos=${archivos[*]}" >> $GITHUB_ENV
-          for archivo in "${archivos[@]}"; do
-            echo "$archivo"
-          done
-      - name: Clone specific file
-        run: |
-          IFS=' ' read -r -a archivos <<< "$(echo "$archivos" | tr -d '\r')"
-          git clone --no-checkout https://github.com/Rodcarm/personal-website.git temp-repo
-          cd temp-repo
-          git sparse-checkout init --cone
-          git sparse-checkout set "${archivos[@]}"
-          git checkout
-          for archivo in "${archivos[@]}"; do
-            mkdir -p "../${archivo%/*}"
-            cp "$archivo" "../$archivo"
-          done
-      - name: Checkout destination repository
-        uses: actions/checkout@v3
-        with:
-          repository: 'Rodcarm/gitActionspersonal-website'
-          token: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: Commit and push
-        run: |
-          IFS=' ' read -r -a archivos <<< "$(echo "$archivos" | tr -d '\r')"
           git config --global user.name "Rodrigo"
           git config --global user.email "rcarmona@realmetrics.io"
-          for archivo in "${archivos[@]}"; do
-            echo "Agregando: $archivo"
-            git add "./${archivo}"
-          done
-          git commit -m "Agregar archivo específico"
-          git push
+          rm -rf .git
+          git clone "https://@github.com/Rodcarm/gitActionspersonal-website.git" repo"
+          cd repo
+          ls -la
+
+
+# name: Clone specific file
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   clone-file:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout destination repository
+#         uses: actions/checkout@v3
+#         with:
+#           repository: 'Rodcarm/controller'
+#           token: ${{ secrets.API_TOKEN_GITHUB }}
+#       - name: test
+#         run: |
+#           mapfile -t archivos < files/new-files/archivesToTest.txt
+#           echo "archivos=${archivos[*]}" >> $GITHUB_ENV
+#           for archivo in "${archivos[@]}"; do
+#             echo "$archivo"
+#           done
+#       - name: Clone specific file
+#         run: |
+#           IFS=' ' read -r -a archivos <<< "$(echo "$archivos" | tr -d '\r')"
+#           git clone --no-checkout https://github.com/Rodcarm/personal-website.git temp-repo
+#           cd temp-repo
+#           git sparse-checkout init --cone
+#           git sparse-checkout set "${archivos[@]}"
+#           git checkout
+#           for archivo in "${archivos[@]}"; do
+#             mkdir -p "../${archivo%/*}"
+#             cp "$archivo" "../$archivo"
+#           done
+#       - name: Checkout destination repository
+#         uses: actions/checkout@v3
+#         with:
+#           repository: 'Rodcarm/gitActionspersonal-website'
+#           token: ${{ secrets.API_TOKEN_GITHUB }}
+#       - name: Commit and push
+#         run: |
+#           IFS=' ' read -r -a archivos <<< "$(echo "$archivos" | tr -d '\r')"
+#           git config --global user.name "Rodrigo"
+#           git config --global user.email "rcarmona@realmetrics.io"
+#           for archivo in "${archivos[@]}"; do
+#             echo "Agregando: $archivo"
+#             git add "./${archivo}"
+#           done
+#           git commit -m "Agregar archivo específico"
+#           git push
