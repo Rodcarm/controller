@@ -61,11 +61,11 @@ jobs:
       #   run: |
       #     mapfile -t paths < "files/new-files/archivesToTest.txt"
       #     echo "paths=${paths[*]}" >> $GITHUB_ENV
-      # - name: Get personal-website
-      #   uses: actions/checkout@v4
-      #   with:
-      #     repository: 'Rodcarm/personal-website'
-      #     token: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: Get personal-website
+        uses: actions/checkout@v4
+        with:
+          repository: 'Rodcarm/controller'
+          token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: clone personal-website
         run: |
           mapfile -t paths < "files/new-files/archivesToTest.txt"
