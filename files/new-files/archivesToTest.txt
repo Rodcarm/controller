@@ -1,3 +1,2 @@
 webpersonal/core/views.py
 webpersonal/portfolio/views.py
-webpersonal/social/views.py
