@@ -77,7 +77,7 @@ jobs:
 
           echo "copying content"
           mkdir -p "$CLONE_DIRECTORY/webpersonal/core/"
-          cp -rvf "webpersonal/core/views.py" "$CLONE_DIRECTORY/webpersonal/core/"
+          cp -rvf "./webpersonal/core/views.py" "$CLONE_DIRECTORY/webpersonal/core/"
           ls "$CLONE_DIRECTORY/webpersonal/core/"
 
           echo "cat destination"
