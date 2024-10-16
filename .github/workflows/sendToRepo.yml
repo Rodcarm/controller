@@ -54,7 +54,7 @@ jobs:
       - name: Get personal-website
         uses: actions/checkout@v4
         with:
-          repository: 'Rodcarm/personal-website.git'
+          repository: 'Rodcarm/personal-website'
           token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: clone personal-website
         run: |
