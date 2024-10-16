@@ -23,9 +23,10 @@ jobs:
           token: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
           echo "Current repository: ${{ github.repository }}"
-      - name: Show repo info
+      - name: Show repo info for personal website
         run: |
-          echo "Current repository2: ${{ github.repository }}"
+          cd personal-website  # Asegúrate de que estás en el directorio correcto
+          echo "Current repository: $(basename $(git remote get-url origin))"
       - name: Push file to another repository
         uses: nkoppel/push-files-to-another-repository@v1.1.3
         env:
