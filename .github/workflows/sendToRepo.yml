@@ -55,7 +55,7 @@ jobs:
       - name: Checkout destination repository
         uses: actions/checkout@v3
         with:
-          repository: 'Rodcarm/gitActionspersonal-website'
+          repository: 'Rodcarm/controller'
           token: ${{ secrets.API_TOKEN_GITHUB }}
 
       - name: Clone specific file
@@ -63,16 +63,24 @@ jobs:
           git clone --no-checkout https://github.com/Rodcarm/personal-website.git temp-repo
           cd temp-repo
           git sparse-checkout init --cone
-          git sparse-checkout set webpersonal/core/views.py
+          mapfile -t archivos < ./files/new-files/archivesToTest.txt
+          git sparse-checkout set "${archivos[@]}"
           git checkout
           
-          # Copiar archivo al repositorio destino
-          cp webpersonal/core/views.py ../webpersonal/core/views.py
-          
+          for archivo in "${archivos[@]}"; do
+            cp "$archivo" "$archivo"
+          done
+      - name: Checkout destination repository
+        uses: actions/checkout@v3
+        with:
+          repository: 'Rodcarm/gitActionspersonal-website'
+          token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: Commit and push
         run: |
           git config --global user.name "Rodrigo"
           git config --global user.email "rcarmona@realmetrics.io"
-          git add ./webpersonal/core/views.py
+          for archivo in "${archivos[@]}"; do
+            git add "${archivo}"
+          done
           git commit -m "Agregar archivo específico"
           git push
