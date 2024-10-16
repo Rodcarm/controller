@@ -1,2 +1,0 @@
-webpersonal/core/views.py
-webpersonal/core/prueba.py
