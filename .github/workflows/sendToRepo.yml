@@ -58,12 +58,16 @@ jobs:
           token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: clone personal-website
         run: |
+          CLONE_DIRECTORY=$(mktemp -d)
           git config --global user.name "Rodrigo"
           git config --global user.email "rcarmona@realmetrics.io"
           rm -rf .git
           git clone https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/personal-website.git repo
           cd repo
           ls -la
+          git clone --single-branch --branch "main" "https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git" "$CLONE_DIRECTORY"
+          echo "CLONE DIRECTORY"
+          ls -la "$CLONE_DIRECTORY"
 
 
 # name: Clone specific file
