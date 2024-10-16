@@ -21,9 +21,11 @@ jobs:
         with:
           repository: 'Rodcarm/personal-website'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: Show repo info
         run: |
           echo "Current repository: ${{ github.repository }}"
+      - name: Show repo info
+        run: |
+          echo "Current repository2: ${{ github.repository }}"
       - name: Push file to another repository
         uses: nkoppel/push-files-to-another-repository@v1.1.3
         env:
