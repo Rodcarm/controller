@@ -73,6 +73,7 @@ jobs:
           git sparse-checkout set "${archivos[@]}"
           git checkout
           for archivo in "${archivos[@]}"; do
+            mkdir -p "../${archivo%/*}"
             cp "$archivo" "../$archivo"
           done
       - name: Checkout destination repository
