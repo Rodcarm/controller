@@ -12,37 +12,32 @@ jobs:
         with:
           repository: 'Rodcarm/controller'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-
-      - name: Get files in txt
+      - name: get files in txt
         run: |
           contenido=$(tr '\n' ' ' < files/new-files/archivesToTest.txt)
           echo "contenido=$contenido" >> $GITHUB_ENV
-          
-      - name: Checkout personal website repository
+      - name: Get files in central repository
         uses: actions/checkout@v3
         with:
           repository: 'Rodcarm/personal-website'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-          path: personal-website  # Clona en el directorio 'personal-website'
-          
-      - name: Show repo info for personal website
+      - name: save changes
         run: |
-          echo "Current repository: Rodcarm/personal-website"
-          
-      - name: Prepare files for pushing
-        run: |
-          # Aquí puedes trabajar con los archivos en el directorio personal-website
-          echo "Contenido desde personal-website: $(cat personal-website)"
-      - name: List files in webpersonal
-        run: |
-          ls -R ./webpersonal
-      - name: Push file to another repository
-        uses: nkoppel/push-files-to-another-repository@v1.1.3
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source-files: ${{ env.contenido }}  # Asegúrate de que 'contenido' sea lo que necesitas
-          destination-branch: 'main'
-          destination-username: 'Rodcarm'
-          destination-repository: 'gitActionspersonal-website'
-          commit-email: rcarmona@realmetrics.io
+          git config --global user.name "Rodrigo"
+          git config --global user.email "rcarmona@realmetrics.io"
+          git add ${{ env.contenido }}
+          git commit -m "esto es un test"
+          git push https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git
+      # - name: Show repo info
+      #   run: |
+      #   echo "Current repository: ${{ github.repository }}"
+      # - name: Push file to another repository
+      #   uses: nkoppel/push-files-to-another-repository@v1.1.3
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      #   with:
+      #     source-files: ${{ env.contenido }}
+      #     destination-branch: 'main'
+      #     destination-username: 'Rodcarm'
+      #     destination-repository: 'gitActionspersonal-website'
+      #     commit-email: rcarmona@realmetrics.io
