@@ -1,1 +1,1 @@
- ./webpersonal/core/views.py
+./webpersonal/core/views.py

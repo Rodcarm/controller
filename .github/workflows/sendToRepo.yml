@@ -32,7 +32,7 @@ jobs:
       - name: Prepare files for pushing
         run: |
           # Aquí puedes trabajar con los archivos en el directorio personal-website
-          echo "Contenido desde personal-website: $(cat personal-website/somefile.txt)"
+          echo "Contenido desde personal-website: $(cat personal-website)"
           
       - name: Push file to another repository
         uses: nkoppel/push-files-to-another-repository@v1.1.3
