@@ -88,7 +88,7 @@ jobs:
           git config --global user.email "rcarmona@realmetrics.io"
           for archivo in "${archivos[@]}"; do
             echo "Agregando: $archivo"
-            git add "../${archivo}"
+            git add "./${archivo}"
           done
           git commit -m "Agregar archivo específico"
           git push
