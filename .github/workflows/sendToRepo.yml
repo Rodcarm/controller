@@ -30,8 +30,6 @@ jobs:
         uses: nkoppel/push-files-to-another-repository@v1.1.3
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        run: |
-          echo 
         with:
           source-files: ${{ env.contenido }}
           destination-branch: 'main'
