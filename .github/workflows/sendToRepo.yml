@@ -52,11 +52,12 @@ jobs:
   clone-file:
     runs-on: ubuntu-latest
     steps:
-      - name: Get txt file
+      - name: Get controller repo
         uses: actions/checkout@v4
         with:
           repository: 'Rodcarm/controller'
           token: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: Get txt file
         run: |
           mapfile -t paths < "files/new-files/archivesToTest.txt"
           echo "paths=${paths[*]}" >> $GITHUB_ENV
