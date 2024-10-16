@@ -68,7 +68,20 @@ jobs:
           git clone --single-branch --branch "main" "https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/gitActionspersonal-website.git" "$CLONE_DIRECTORY"
           echo "CLONE DIRECTORY"
           ls -la "$CLONE_DIRECTORY"
+          echo "copying content"
+          mkdir -p "$CLONE_DIRECTORY/webpersonal/core/"
+          cp -rvf "webpersonal/core/views.py" "$CLONE_DIRECTORY/webpersonal/core/"
 
+          ORIGIN_COMMIT="https://github.com/Rodcarm/controller/commit/2345432343"
+          COMMIT_MESSAGE="THIS IS A TEST"
+          echo "git add"
+          git add .
+          git status
+
+          git diff-index --quiet HEAD || git commit --message "$COMMIT_MESSAGE"
+          echo "push commit"
+          git push origin --set-upstream main
+ 
 
 # name: Clone specific file
 # on:
