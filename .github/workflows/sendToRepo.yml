@@ -33,7 +33,9 @@ jobs:
         run: |
           # Aquí puedes trabajar con los archivos en el directorio personal-website
           echo "Contenido desde personal-website: $(cat personal-website)"
-          
+      - name: List files in webpersonal
+        run: |
+          ls -R ./webpersonal
       - name: Push file to another repository
         uses: nkoppel/push-files-to-another-repository@v1.1.3
         env:
