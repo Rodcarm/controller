@@ -52,22 +52,23 @@ jobs:
   clone-file:
     runs-on: ubuntu-latest
     steps:
-      - name: Get controller repo
-        uses: actions/checkout@v4
-        with:
-          repository: 'Rodcarm/controller'
-          token: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: Get txt file
-        run: |
-          mapfile -t paths < "files/new-files/archivesToTest.txt"
-          echo "paths=${paths[*]}" >> $GITHUB_ENV
-      - name: Get personal-website
-        uses: actions/checkout@v4
-        with:
-          repository: 'Rodcarm/personal-website'
-          token: ${{ secrets.API_TOKEN_GITHUB }}
+      # - name: Get controller repo
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: 'Rodcarm/controller'
+      #     token: ${{ secrets.API_TOKEN_GITHUB }}
+      # - name: Get txt file
+      #   run: |
+      #     mapfile -t paths < "files/new-files/archivesToTest.txt"
+      #     echo "paths=${paths[*]}" >> $GITHUB_ENV
+      # - name: Get personal-website
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: 'Rodcarm/personal-website'
+      #     token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: clone personal-website
         run: |
+          mapfile -t paths < "files/new-files/archivesToTest.txt"
           CLONE_DIRECTORY=$(mktemp -d)
           git config --global user.name "Rodrigo"
           git config --global user.email "rcarmona@realmetrics.io"
