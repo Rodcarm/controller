@@ -66,7 +66,7 @@ jobs:
           done
       - name: Clone specific file
         run: |
-          IFS=' ' read -r -a archivos <<< "$archivos"
+          IFS=' ' read -r -a archivos <<< "$(echo "$archivos" | tr -d '\r')"
           git clone --no-checkout https://github.com/Rodcarm/personal-website.git temp-repo
           cd temp-repo
           git sparse-checkout init --cone
@@ -83,7 +83,7 @@ jobs:
           token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: Commit and push
         run: |
-          IFS=' ' read -r -a archivos <<< "$archivos"
+          IFS=' ' read -r -a archivos <<< "$(echo "$archivos" | tr -d '\r')"
           git config --global user.name "Rodrigo"
           git config --global user.email "rcarmona@realmetrics.io"
           for archivo in "${archivos[@]}"; do
