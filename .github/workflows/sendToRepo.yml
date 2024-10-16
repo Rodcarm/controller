@@ -60,18 +60,18 @@ jobs:
       - name: test
         run: |
           mapfile -t archivos < files/new-files/archivesToTest.txt
+          echo "archivos=${archivos[*]}" >> $GITHUB_ENV
           for archivo in "${archivos[@]}"; do
             echo "$archivo"
           done
       - name: Clone specific file
         run: |
+          IFS=' ' read -r -a archivos <<< "$archivos"
           git clone --no-checkout https://github.com/Rodcarm/personal-website.git temp-repo
           cd temp-repo
           git sparse-checkout init --cone
-          mapfile -t archivos < files/new-files/archivesToTest.txt
           git sparse-checkout set "${archivos[@]}"
           git checkout
-          
           for archivo in "${archivos[@]}"; do
             cp "$archivo" "$archivo"
           done
