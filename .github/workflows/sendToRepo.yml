@@ -58,11 +58,10 @@ jobs:
           token: ${{ secrets.API_TOKEN_GITHUB }}
       - name: 
         run: |
-          echo $GITHUB_REPOSITORY
           git config --global user.name "Rodrigo"
           git config --global user.email "rcarmona@realmetrics.io"
           rm -rf .git
-          git clone "https://github.com/Rodcarm/gitActionspersonal-website.git" repo
+          git clone "https://github.com/Rodcarm/personal-website.git.git" repo
           cd repo
           ls -la
 
