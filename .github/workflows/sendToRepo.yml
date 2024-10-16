@@ -72,9 +72,6 @@ jobs:
           git sparse-checkout init --cone
           git sparse-checkout set "${archivos[@]}"
           git checkout
-          for archivo in "${archivos[@]}"; do
-            cp "$archivo" "$archivo"
-          done
       - name: Checkout destination repository
         uses: actions/checkout@v3
         with:
