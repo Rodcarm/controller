@@ -21,11 +21,10 @@ jobs:
         with:
           repository: 'Rodcarm/personal-website'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-        run: |
-          echo "Current repository: ${{ github.repository }}"
+          path: 'main'
       - name: Show repo info for personal website
         run: |
-          cd personal-website  # Asegúrate de que estás en el directorio correcto
+          cd main
           echo "Current repository: $(basename $(git remote get-url origin))"
       - name: Push file to another repository
         uses: nkoppel/push-files-to-another-repository@v1.1.3
