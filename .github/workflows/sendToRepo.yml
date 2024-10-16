@@ -12,26 +12,34 @@ jobs:
         with:
           repository: 'Rodcarm/controller'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: get files in txt
+
+      - name: Get files in txt
         run: |
           contenido=$(tr '\n' ' ' < files/new-files/archivesToTest.txt)
           echo "contenido=$contenido" >> $GITHUB_ENV
-      - name: Get files in central repository
+          
+      - name: Checkout personal website repository
         uses: actions/checkout@v3
         with:
           repository: 'Rodcarm/personal-website'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-          path: 'main'
+          path: personal-website  # Clona en el directorio 'personal-website'
+          
       - name: Show repo info for personal website
         run: |
-          cd main
-          echo "Current repository: $(basename $(git remote get-url origin))"
+          echo "Current repository: Rodcarm/personal-website"
+          
+      - name: Prepare files for pushing
+        run: |
+          # Aquí puedes trabajar con los archivos en el directorio personal-website
+          echo "Contenido desde personal-website: $(cat personal-website/somefile.txt)"
+          
       - name: Push file to another repository
         uses: nkoppel/push-files-to-another-repository@v1.1.3
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-files: 'personal-website/webpersonal/core/views.py'
+          source-files: ${{ env.contenido }}  # Asegúrate de que 'contenido' sea lo que necesitas
           destination-branch: 'main'
           destination-username: 'Rodcarm'
           destination-repository: 'gitActionspersonal-website'
