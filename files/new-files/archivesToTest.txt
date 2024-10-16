@@ -1,1 +1,2 @@
 webpersonal/core/views.py
+test2
