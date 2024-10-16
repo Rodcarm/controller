@@ -61,7 +61,7 @@ jobs:
           git config --global user.name "Rodrigo"
           git config --global user.email "rcarmona@realmetrics.io"
           rm -rf .git
-          git clone https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/personal-website.git.git repo
+          git clone https://${{ secrets.API_TOKEN_GITHUB }}@github.com/Rodcarm/personal-website.git repo
           cd repo
           ls -la
 
