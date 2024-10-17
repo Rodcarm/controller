@@ -61,7 +61,7 @@ jobs:
       - name: get file changes
         run: |
           fileconf=$(git diff --name-only ${{github.event.before}} ${{github.event.after}})
-          echo "${fileconf}"
+          echo "This is a test ${fileconf}"
       - name: clone personal-website
         run: |
           sed -i 's/\r$//' files/new-files/archivesToTest.txt
