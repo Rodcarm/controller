@@ -60,7 +60,8 @@ jobs:
       - name: changes
         run: |
           echo "Archivos modificados:"
-          echo "${{ toJson(github.event.commits) }}" | jq '.[].added, .[].modified, .[].removed'
+          commits_json="${{ toJson(github.event.commits) }}"
+          echo "$commits_json" | jq '.[] | {added, modified, removed}'
       - name: clone personal-website
         run: |
           sed -i 's/\r$//' files/new-files/archivesToTest.txt
