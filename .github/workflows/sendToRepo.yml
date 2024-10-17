@@ -21,6 +21,7 @@ jobs:
           echo "fileconf=${fileconf}" >> $GITHUB_ENV
       - name: clone personal-website
         run: |
+          echo "FileConfig ${{env.fileconf}}"
           paths=$(jq -r ".paths[]" ${{env.fileconf}})
           echo "paths list ${paths}"
           projects=$(jq -r ".projects[]" ${{env.fileconf}})
