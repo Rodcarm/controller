@@ -61,9 +61,13 @@ jobs:
       - name: get file changes
         run: |
           fileconf=$(git diff --name-only ${{github.event.before}} ${{github.event.after}})
-          echo "This is a test ${fileconf}"
+          echo "fileconf=${fileconf}" >> $GITHUB_ENV
       - name: clone personal-website
         run: |
+          paths=$(jq -r ".paths[]" ${{env.fileconf}})
+          echo "paths list ${paths}"
+          projects=$(jq -r ".projects[]" ${{env.fileconf}})
+          echo "projects list ${projects}"
           sed -i 's/\r$//' files/new-files/archivesToTest.txt
           mapfile -t paths < "files/new-files/archivesToTest.txt"
           CLONE_DIRECTORY=$(mktemp -d)
