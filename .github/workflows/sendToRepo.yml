@@ -60,7 +60,7 @@ jobs:
           fetch-depth: 0
       - name: get file changes
         run: |
-          fileconf=git diff --name-only ${{github.event.before}} ${{github.event.after}}
+          fileconf=$(git diff --name-only ${{github.event.before}} ${{github.event.after}})
           echo "${fileconf}"
       - name: clone personal-website
         run: |
