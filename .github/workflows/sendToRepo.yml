@@ -36,6 +36,7 @@ jobs:
           ls -la
           for project in "${projects[@]}"
           do
+            echo "PROJECT ${project}"
             rm -rf "$CLONE_DIRECTORY"/*
             echo "Project process ${project}"
     
@@ -47,7 +48,8 @@ jobs:
 
             for path in "${paths[@]}"
             do
-              DESTINATION_DIRECTORY=$(dirname "$path")/
+              echo "PATH ${path}"
+              DESTINATION_DIRECTORY=$(dirname "${path}")/
               echo "directory ${DESTINATION_DIRECTORY}"
               echo "path ${path}"
               mkdir -p "$CLONE_DIRECTORY/$DESTINATION_DIRECTORY"
@@ -68,5 +70,3 @@ jobs:
             git push origin --set-upstream main
 
           done
- 
-
