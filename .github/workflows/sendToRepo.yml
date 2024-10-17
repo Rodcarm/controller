@@ -22,9 +22,9 @@ jobs:
       - name: clone personal-website
         run: |
           echo "FileConfig ${{env.fileconf}}"
-          paths=$(jq -r ".paths[]" ${{env.fileconf}})
+          paths=($(jq -r ".paths[]" ${{env.fileconf}}))
           echo "paths list ${paths}"
-          projects=$(jq -r ".projects[]" ${{env.fileconf}})
+          projects=($(jq -r ".projects[]" ${{env.fileconf}}))
           echo "projects list ${projects}"
           commit=$(jq -r ".commit_message" ${{env.fileconf}})
           CLONE_DIRECTORY=$(mktemp -d)
