@@ -2,6 +2,7 @@
   "paths": [
     "webpersonal/core/views.py",
     "webpersonal/core/prueba.py",
+    "webpersonal/core/tests.py",
     "webpersonal/portfolio/views.py"
   ],
   "projects": [
