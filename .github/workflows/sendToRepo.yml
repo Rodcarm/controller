@@ -48,6 +48,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      -'files/new-files/*'
 jobs:
   clone-file:
     runs-on: ubuntu-latest
