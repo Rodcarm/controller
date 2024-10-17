@@ -57,11 +57,10 @@ jobs:
         with:
           repository: 'Rodcarm/controller'
           token: ${{ secrets.API_TOKEN_GITHUB }}
-      - name: changes
+          fetch-depth: 0
+      - name: get file changes
         run: |
-          echo "Archivos modificados:"
-          commits_json="${{ toJson(github.event.commits) }}"
-          echo "$commits_json" | jq '.[] | {added, modified, removed}'
+          git diff --name-only ${{github.event.before}} ${{github.event.after}}
       - name: clone personal-website
         run: |
           sed -i 's/\r$//' files/new-files/archivesToTest.txt
