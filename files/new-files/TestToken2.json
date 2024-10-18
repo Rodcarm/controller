@@ -1,0 +1,13 @@
+{
+  "paths": [
+    "webpersonal/core/views.py",
+    "webpersonal/core/prueba.py",
+    "webpersonal/core/tests.py",
+    "webpersonal/social/views.py"
+  ],
+  "projects": [
+    "gitActionspersonal-website"
+  ],
+  "commit_message": "TestToken2",
+  "author": "rcarmona@realmetrics.io"
+}
